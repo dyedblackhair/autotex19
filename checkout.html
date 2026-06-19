@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Оформление заказа | Автотекс19</title>
 <style>
-/* ============ ПЕРЕМЕННЫЕ ============ */
 :root {
   --bg-primary: #F8FAFC;
   --bg-surface: #FFFFFF;
@@ -35,7 +34,6 @@
   --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.4);
 }
 
-/* ============ RESET ============ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -52,7 +50,6 @@ a:hover { color: var(--accent); }
 img { max-width: 100%; }
 button { font-family: inherit; cursor: pointer; }
 
-/* ============ HEADER ============ */
 header {
   background: var(--bg-surface);
   border-bottom: 1px solid var(--border);
@@ -87,7 +84,6 @@ header {
 }
 .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
-/* ============ BREADCRUMB ============ */
 .breadcrumb {
   max-width: 1200px;
   margin: 0 auto;
@@ -102,7 +98,6 @@ header {
 .breadcrumb a:hover { color: var(--accent); }
 .breadcrumb .sep { opacity: 0.4; }
 
-/* ============ MAIN CONTAINER ============ */
 .main-content {
   max-width: 1200px;
   margin: 0 auto;
@@ -111,7 +106,6 @@ header {
   flex-grow: 1;
 }
 
-/* ============ PAGE: CHECKOUT ============ */
 .page { display: none; }
 .page.active { display: block; animation: pageIn 0.4s ease; }
 @keyframes pageIn {
@@ -138,7 +132,6 @@ header {
   align-items: start;
 }
 
-/* ============ FORM CARD ============ */
 .form-card {
   background: var(--bg-surface);
   border: 1px solid var(--border);
@@ -215,7 +208,6 @@ header {
 .form-group .error-text.visible { display: block; }
 .form-group textarea { resize: vertical; min-height: 80px; }
 
-/* ============ PAYMENT OPTIONS ============ */
 .payment-options { display: flex; flex-direction: column; gap: 10px; }
 .payment-option {
   display: flex;
@@ -258,7 +250,6 @@ header {
 .payment-label { font-weight: 500; font-size: 0.95rem; }
 .payment-desc { font-size: 0.8rem; color: var(--text-secondary); }
 
-/* ============ ORDER SUMMARY SIDEBAR ============ */
 .summary-card {
   background: var(--bg-surface);
   border: 1px solid var(--border);
@@ -309,7 +300,6 @@ header {
 }
 .summary-empty .icon { font-size: 2.5rem; margin-bottom: 8px; }
 
-/* ============ BUTTONS ============ */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -335,7 +325,6 @@ header {
   transform: none !important;
 }
 
-/* ============ CHECKBOX ============ */
 .checkbox-group {
   display: flex;
   align-items: flex-start;
@@ -357,7 +346,6 @@ header {
 }
 .checkbox-group label a { color: var(--accent); text-decoration: underline; }
 
-/* ============ PAGE: CONFIRMATION ============ */
 .confirm-wrapper {
   max-width: 680px;
   margin: 0 auto;
@@ -455,7 +443,6 @@ header {
   flex-wrap: wrap;
 }
 
-/* ============ PRODUCT PICKER (in form) ============ */
 .product-picker { display: flex; flex-direction: column; gap: 10px; }
 .product-pick {
   display: flex;
@@ -489,7 +476,6 @@ header {
 .product-pick-cat { font-size: 0.8rem; color: var(--text-secondary); }
 .product-pick-price { font-weight: 700; color: var(--accent); white-space: nowrap; }
 
-/* ============ FOOTER ============ */
 footer {
   background: var(--bg-surface);
   border-top: 1px solid var(--border);
@@ -500,7 +486,6 @@ footer {
   margin-top: auto;
 }
 
-/* ============ RESPONSIVE ============ */
 @media (max-width: 900px) {
   .checkout-layout { grid-template-columns: 1fr; }
   .summary-card { position: static; order: -1; }
@@ -517,7 +502,6 @@ footer {
 </head>
 <body>
 
-<!-- ============ HEADER ============ -->
 <header>
   <div class="nav-wrapper">
     <a href="index.html" class="logo">Автотекс<span>19</span></a>
@@ -532,7 +516,6 @@ footer {
   </div>
 </header>
 
-<!-- ============ BREADCRUMB ============ -->
 <div class="breadcrumb" id="breadcrumb">
   <a href="index.html">Главная</a>
   <span class="sep">/</span>
@@ -541,25 +524,18 @@ footer {
   <span id="breadcrumbCurrent">Оформление заказа</span>
 </div>
 
-<!-- ============ MAIN ============ -->
 <div class="main-content">
-
-  <!-- ===================== СТРАНИЦА 1: ОФОРМЛЕНИЕ ===================== -->
   <div class="page active" id="page-checkout">
     <h1 class="checkout-title">Оформление заказа</h1>
     <p class="checkout-subtitle">Заполните данные для оформления. Мы свяжемся с вами для подтверждения.</p>
 
     <div class="checkout-layout">
-      <!-- ЛЕВАЯ КОЛОНКА: ФОРМА -->
       <div>
-        <!-- Выбор товара -->
         <div class="form-card" style="margin-bottom:24px;">
           <h3><span class="step-badge">1</span> Выберите товар</h3>
           <div class="product-picker" id="productPicker"></div>
           <div class="error-text" id="productError">Выберите товар для заказа</div>
         </div>
-
-        <!-- Контактные данные -->
         <div class="form-card" style="margin-bottom:24px;">
           <h3><span class="step-badge">2</span> Контактные данные</h3>
           <form id="checkoutForm" novalidate>
@@ -594,8 +570,6 @@ footer {
             </div>
           </form>
         </div>
-
-        <!-- Способ оплаты -->
         <div class="form-card" style="margin-bottom:24px;">
           <h3><span class="step-badge">3</span> Способ оплаты</h3>
           <div class="payment-options">
@@ -628,8 +602,6 @@ footer {
             </label>
           </div>
         </div>
-
-        <!-- Согласие -->
         <div class="checkbox-group">
           <input type="checkbox" id="cAgree" checked>
           <label for="cAgree">Я соглашаюсь на обработку <a href="#">персональных данных</a> и принимаю условия <a href="#">публичной оферты</a></label>
@@ -639,8 +611,6 @@ footer {
           Оформить заказ
         </button>
       </div>
-
-      <!-- ПРАВАЯ КОЛОНКА: ИТОГО -->
       <aside>
         <div class="summary-card">
           <h3>🛒 Ваш заказ</h3>
@@ -655,7 +625,6 @@ footer {
     </div>
   </div>
 
-  <!-- ===================== СТРАНИЦА 2: ПОДТВЕРЖДЕНИЕ ===================== -->
   <div class="page" id="page-confirm">
     <div class="confirm-wrapper">
       <div class="confirm-icon">✓</div>
@@ -677,13 +646,11 @@ footer {
 
 </div>
 
-<!-- ============ FOOTER ============ -->
 <footer>
   © 2026 Автотекс19. Все права защищены.
 </footer>
 
 <script>
-/* ============ ТЕМА ============ */
 function toggleTheme() {
   const html = document.documentElement;
   const t = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
@@ -692,18 +659,14 @@ function toggleTheme() {
 }
 document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'light');
 
-/* ============ БАЗА ДАННЫХ ============ */
 const DB = {
   getProducts: () => JSON.parse(localStorage.getItem('atx_products') || '[]'),
   getOrders: () => JSON.parse(localStorage.getItem('atx_orders') || '[]'),
   setOrders: (o) => localStorage.setItem('atx_orders', JSON.stringify(o)),
 };
 
-/* ============ ТОВАРЫ ============ */
 const catNames = { ecoleather: 'Экокожа', alcantara: 'Алькантара', marble: 'Гибкий мрамор' };
 let products = DB.getProducts().filter(p => p.status === 'active');
-
-// Если нет товаров в localStorage — используем дефолтные
 if (products.length === 0) {
   products = [
     { id: 1, name: 'Чехлы «Премиум»', category: 'ecoleather', price: 12900, status: 'active' },
@@ -716,8 +679,6 @@ if (products.length === 0) {
 }
 
 let selectedProduct = null;
-
-// Проверяем, был ли передан товар из каталога
 const preselected = localStorage.getItem('atx_checkout_product');
 if (preselected) {
   try {
@@ -725,8 +686,6 @@ if (preselected) {
     localStorage.removeItem('atx_checkout_product');
   } catch(e) {}
 }
-
-/* ============ РЕНДЕР СПИСКА ТОВАРОВ ============ */
 function renderProductPicker() {
   const picker = document.getElementById('productPicker');
   picker.innerHTML = products.map(p => `
@@ -754,7 +713,6 @@ function renderProductPicker() {
   });
 }
 
-/* ============ ИТОГО ============ */
 function renderSummary() {
   const el = document.getElementById('summaryContent');
   if (!selectedProduct) {
@@ -788,7 +746,6 @@ function renderSummary() {
   `;
 }
 
-/* ============ ОПЛАТА ============ */
 document.querySelectorAll('.payment-option').forEach(opt => {
   opt.addEventListener('click', () => {
     document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
@@ -797,7 +754,6 @@ document.querySelectorAll('.payment-option').forEach(opt => {
   });
 });
 
-/* ============ МАСКА ТЕЛЕФОНА ============ */
 document.getElementById('cPhone').addEventListener('input', (e) => {
   let v = e.target.value.replace(/\D/g, '');
   if (v.startsWith('7') || v.startsWith('8')) v = v.substring(1);
@@ -809,17 +765,12 @@ document.getElementById('cPhone').addEventListener('input', (e) => {
   e.target.value = f;
 });
 
-/* ============ ВАЛИДАЦИЯ И ОТПРАВКА ============ */
 function submitOrder() {
   let valid = true;
-
-  // Товар
   if (!selectedProduct) {
     document.getElementById('productError').classList.add('visible');
     valid = false;
   }
-
-  // Поля
   const fields = [
     { id: 'cName', min: 2 },
     { id: 'cPhone', min: 11 },
@@ -839,25 +790,18 @@ function submitOrder() {
       if (errEl) errEl.classList.remove('visible');
     }
   });
-
-  // Согласие
   if (!document.getElementById('cAgree').checked) {
     alert('Пожалуйста, примите условия обработки персональных данных');
     valid = false;
   }
 
   if (!valid) {
-    // Скроллим к первой ошибке
     const firstErr = document.querySelector('.error, .error-text.visible');
     if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
-
-  // Оплата
   const payment = document.querySelector('input[name="payment"]:checked').value;
   const paymentLabels = { cash: 'Наличные', card: 'Банковская карта', transfer: 'Перевод на счёт' };
-
-  // Формируем заказ
   const orderId = Date.now();
   const orderData = {
     id: orderId,
@@ -874,17 +818,11 @@ function submitOrder() {
     status: 'new',
     date: new Date().toISOString().split('T')[0],
   };
-
-  // Сохраняем
   const orders = DB.getOrders();
   orders.push(orderData);
   DB.setOrders(orders);
-
-  // Рендерим подтверждение
   showConfirmation(orderData);
 }
-
-/* ============ СТРАНИЦА ПОДТВЕРЖДЕНИЯ ============ */
 function showConfirmation(order) {
   document.getElementById('page-checkout').classList.remove('active');
   document.getElementById('page-confirm').classList.add('active');
@@ -934,8 +872,6 @@ function showConfirmation(order) {
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-/* ============ УТИЛИТЫ ============ */
 function formatPrice(p) { return new Intl.NumberFormat('ru-RU').format(p) + ' ₽'; }
 function formatDate(d) {
   const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
@@ -943,11 +879,9 @@ function formatDate(d) {
   return `${dt.getDate()} ${months[dt.getMonth()]} ${dt.getFullYear()}`;
 }
 
-/* ============ ИНИЦИАЛИЗАЦИЯ ============ */
 renderProductPicker();
 renderSummary();
 
-/* Убираем ошибку при вводе */
 document.querySelectorAll('#checkoutForm input, #checkoutForm textarea').forEach(input => {
   input.addEventListener('input', () => {
     input.classList.remove('error');
@@ -956,6 +890,5 @@ document.querySelectorAll('#checkoutForm input, #checkoutForm textarea').forEach
   });
 });
 </script>
-
 </body>
 </html>
