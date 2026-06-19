@@ -5,8 +5,6 @@
   document.getElementById('adminName').textContent = admin.username;
   document.getElementById('adminUsername').textContent = admin.email;
   document.getElementById('adminAvatar').textContent = admin.username.charAt(0).toUpperCase();
-
-  // Навигация
   const titles = {
     dashboard: 'Дашборд', orders: 'Заказы', products: 'Товары',
     requests: 'Заявки', clients: 'Клиенты'
@@ -22,7 +20,6 @@
     });
   });
 
-  // ===== Дашборд =====
   function renderDashboard() {
     document.getElementById('statOrders').textContent = DB.getOrders().length;
     document.getElementById('statProducts').textContent = DB.getProducts().length;
@@ -54,7 +51,6 @@
       : '<p class="text-secondary">Нет заявок</p>';
   }
 
-  // ===== Заказы =====
   function renderOrders() {
     const tbody = document.getElementById('ordersTableBody');
     const orders = DB.getOrders();
@@ -125,7 +121,6 @@
     renderDashboard();
   });
 
-  // ===== Товары =====
   function renderProducts() {
     const tbody = document.getElementById('productsTableBody');
     const products = DB.getProducts();
@@ -189,7 +184,6 @@
     renderDashboard();
   });
 
-  // ===== Заявки =====
   let requestFilter = 'all';
   function renderRequests() {
     const tbody = document.getElementById('requestsTableBody');
@@ -240,7 +234,6 @@
     });
   });
 
-  // ===== Клиенты =====
   function renderClients(filter = '') {
     const tbody = document.getElementById('clientsTableBody');
     let users = DB.getUsers();
@@ -279,7 +272,6 @@
     renderClients(e.target.value);
   });
 
-  // ===== Общая функция рендера =====
   function renderSection(section) {
     if (section === 'dashboard') renderDashboard();
     if (section === 'orders') renderOrders();
@@ -288,11 +280,8 @@
     if (section === 'clients') renderClients();
   }
 
-  // Первый рендер
   renderDashboard();
 })();
-
-// ===== Модалки =====
 function closeModal(id) {
   document.getElementById(id).classList.remove('active');
 }
@@ -302,7 +291,6 @@ document.querySelectorAll('.modal').forEach(m => {
   });
 });
 
-// ===== Выход админа =====
 function adminLogout() {
   if (confirm('Выйти из админ-панели?')) {
     localStorage.removeItem('atx_current_admin');
@@ -310,7 +298,6 @@ function adminLogout() {
   }
 }
 
-// ===== Утилиты (дублируем для безопасности) =====
 function formatPrice(p) { return new Intl.NumberFormat('ru-RU').format(p) + ' ₽'; }
 function statusLabel(s) {
   return { new: 'Новый', processing: 'В работе', done: 'Выполнен', cancelled: 'Отменён' }[s] || s;
