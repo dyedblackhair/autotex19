@@ -1,4 +1,3 @@
-// Theme Toggle
 function toggleTheme() {
     const html = document.documentElement;
     const currentTheme = html.getAttribute('data-theme');
@@ -8,35 +7,23 @@ function toggleTheme() {
     localStorage.setItem('theme', newTheme);
 }
 
-// Load saved theme
 document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
-    
-    // Filter functionality
     initFilters();
-    
-    // Form handling
     initForms();
-    
-    // Phone mask
     initPhoneMask();
 });
-
-// Filter functionality
 function initFilters() {
     const filterBtns = document.querySelectorAll('.tab-btn');
     const cards = document.querySelectorAll('[data-category]');
     
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Update active button
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             
             const filter = btn.getAttribute('data-filter');
-            
-            // Filter cards
             cards.forEach(card => {
                 const category = card.getAttribute('data-category');
                 if (filter === 'all' || category === filter) {
@@ -56,8 +43,6 @@ function initFilters() {
         });
     });
 }
-
-// Form handling
 function initForms() {
     const contactForm = document.getElementById('contactForm');
     
@@ -68,17 +53,14 @@ function initForms() {
             const formData = new FormData(contactForm);
             const data = Object.fromEntries(formData);
             
-            // Here you would normally send data to server
             console.log('Form data:', data);
             
-            // Show success message
             alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
             contactForm.reset();
         });
     }
 }
 
-// Phone mask
 function initPhoneMask() {
     const phoneInput = document.getElementById('phone');
     
@@ -112,12 +94,9 @@ function initPhoneMask() {
     }
 }
 
-// Add to cart (placeholder)
 function addToCart(productName) {
     alert(`Товар "${productName}" добавлен в корзину. В реальной версии здесь будет переход к оформлению заказа.`);
 }
-
-// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -127,10 +106,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
-
-// Theme Toggle + существующий код...
-
-// Burger Menu
 function initBurger() {
     const burger = document.getElementById('burger');
     const navMenu = document.getElementById('nav-menu');
@@ -152,8 +127,6 @@ function initBurger() {
             });
         }
     });
-    
-    // Закрытие меню при клике на ссылку
     navMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             navMenu.classList.remove('active');
