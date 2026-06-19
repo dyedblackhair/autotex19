@@ -1,4 +1,3 @@
-// ===== Утилиты localStorage =====
 const DB = {
   getUsers: () => JSON.parse(localStorage.getItem('atx_users') || '[]'),
   setUsers: (u) => localStorage.setItem('atx_users', JSON.stringify(u)),
@@ -16,7 +15,6 @@ const DB = {
   setCurrentAdmin: (a) => localStorage.setItem('atx_current_admin', JSON.stringify(a)),
 };
 
-// ===== Инициализация демо-данных =====
 function initDemoData() {
   if (DB.getProducts().length === 0) {
     DB.setProducts([
@@ -48,8 +46,6 @@ function initDemoData() {
   }
 }
 initDemoData();
-
-// ===== Переключение табов =====
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.auth-tabs').forEach(tabs => {
     tabs.querySelectorAll('.auth-tab').forEach(tab => {
@@ -60,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const parent = tabs.parentElement;
         parent.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
         parent.querySelector(`#${target}Form, #${target.replace('-', '')}Form`)?.classList.add('active');
-        // Более надёжный поиск
         const forms = parent.querySelectorAll('.auth-form');
         forms.forEach(f => {
           if (f.id.toLowerCase().includes(target.replace('-', ''))) f.classList.add('active');
@@ -70,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// ===== Выход =====
 function logout() {
   if (confirm('Выйти из аккаунта?')) {
     localStorage.removeItem('atx_current_user');
@@ -78,7 +72,6 @@ function logout() {
   }
 }
 
-// ===== Маска телефона (расширенная) =====
 document.querySelectorAll('.phone-input').forEach(input => {
   input.addEventListener('input', (e) => {
     let v = e.target.value.replace(/\D/g, '');
@@ -92,7 +85,6 @@ document.querySelectorAll('.phone-input').forEach(input => {
   });
 });
 
-// ===== Регистрация пользователя =====
 document.getElementById('registerForm')?.addEventListener('submit', (e) => {
   e.preventDefault();
   const err = document.getElementById('registerError');
@@ -133,7 +125,6 @@ document.getElementById('registerForm')?.addEventListener('submit', (e) => {
   setTimeout(() => window.location.href = 'profile.html', 1200);
 });
 
-// ===== Вход пользователя =====
 document.getElementById('loginForm')?.addEventListener('submit', (e) => {
   e.preventDefault();
   const err = document.getElementById('loginError');
@@ -153,7 +144,6 @@ document.getElementById('loginForm')?.addEventListener('submit', (e) => {
   window.location.href = 'profile.html';
 });
 
-// ===== Авто-редирект если уже залогинен =====
 if (document.getElementById('loginForm') && DB.getCurrentUser()) {
   window.location.href = 'profile.html';
 }
