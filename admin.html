@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Админ-панель | Автотекс19</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-body">
+
+<div class="admin-layout">
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-header">
+      <div class="logo">Автотекс<span>19</span></div>
+      <small class="text-secondary">Admin Panel</small>
+    </div>
+    <nav class="admin-nav">
+      <button class="admin-nav-btn active" data-section="dashboard">📊 Дашборд</button>
+      <button class="admin-nav-btn" data-section="orders">📦 Заказы</button>
+      <button class="admin-nav-btn" data-section="products">🏷️ Товары</button>
+      <button class="admin-nav-btn" data-section="requests">📝 Заявки</button>
+      <button class="admin-nav-btn" data-section="clients">👥 Клиенты</button>
+    </nav>
+    <div class="admin-sidebar-footer">
+      <div class="admin-user-info">
+        <div class="admin-user-avatar" id="adminAvatar">A</div>
+        <div>
+          <div id="adminName" style="font-weight:600; font-size:0.9rem;">Админ</div>
+          <small class="text-secondary" id="adminUsername">admin</small>
+        </div>
+      </div>
+      <button class="btn btn-secondary btn-full" onclick="adminLogout()" style="margin-top:12px;">Выйти</button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <h2 id="adminPageTitle">Дашборд</h2>
+      <div class="admin-topbar-actions">
+        <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+        <a href="index.html" class="btn btn-secondary">← На сайт</a>
+      </div>
+    </header>
+
+    <div class="admin-content">
+      <!-- Дашборд -->
+      <div class="admin-section active" id="admin-dashboard">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon" style="background:rgba(13,148,136,0.1); color:var(--accent);">📦</div>
+            <div>
+              <div class="stat-value" id="statOrders">0</div>
+              <div class="stat-label">Заказов</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:rgba(139,92,246,0.1); color:#8B5CF6;">🏷️</div>
+            <div>
+              <div class="stat-value" id="statProducts">0</div>
+              <div class="stat-label">Товаров</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:rgba(245,158,11,0.1); color:#F59E0B;">📝</div>
+            <div>
+              <div class="stat-value" id="statRequests">0</div>
+              <div class="stat-label">Заявок</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:rgba(59,130,246,0.1); color:#3B82F6;">👥</div>
+            <div>
+              <div class="stat-value" id="statClients">0</div>
+              <div class="stat-label">Клиентов</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-top:24px;">
+          <div class="card">
+            <h3 style="margin-bottom:16px;">Последние заказы</h3>
+            <div id="recentOrders"></div>
+          </div>
+          <div class="card">
+            <h3 style="margin-bottom:16px;">Последние заявки</h3>
+            <div id="recentRequests"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Заказы -->
+      <div class="admin-section" id="admin-orders">
+        <div class="card">
+          <div class="admin-section-header">
+            <h2>Заказы</h2>
+            <button class="btn btn-primary" onclick="openOrderModal()">+ Новый заказ</button>
+          </div>
+          <div class="admin-table-wrapper">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>№</th>
+                  <th>Клиент</th>
+                  <th>Товар</th>
+                  <th>Сумма</th>
+                  <th>Статус</th>
+                  <th>Дата</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Товары -->
+      <div class="admin-section" id="admin-products">
+        <div class="card">
+          <div class="admin-section-header">
+            <h2>Товары</h2>
+            <button class="btn btn-primary" onclick="openProductModal()">+ Добавить товар</button>
+          </div>
+          <div class="admin-table-wrapper">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Название</th>
+                  <th>Категория</th>
+                  <th>Цена</th>
+                  <th>Статус</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="productsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Заявки -->
+      <div class="admin-section" id="admin-requests">
+        <div class="card">
+          <div class="admin-section-header">
+            <h2>Заявки с сайта</h2>
+            <div class="admin-filters">
+              <button class="tab-btn active" data-status="all">Все</button>
+              <button class="tab-btn" data-status="new">Новые</button>
+              <button class="tab-btn" data-status="processed">Обработанные</button>
+            </div>
+          </div>
+          <div class="admin-table-wrapper">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Имя</th>
+                  <th>Телефон</th>
+                  <th>Сообщение</th>
+                  <th>Дата</th>
+                  <th>Статус</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="requestsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Клиенты -->
+      <div class="admin-section" id="admin-clients">
+        <div class="card">
+          <div class="admin-section-header">
+            <h2>Клиенты</h2>
+            <input type="text" id="clientSearch" placeholder="🔍 Поиск по имени или email..." style="max-width:300px;">
+          </div>
+          <div class="admin-table-wrapper">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Имя</th>
+                  <th>Email</th>
+                  <th>Телефон</th>
+                  <th>Заказов</th>
+                  <th>Регистрация</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="clientsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Модальное окно заказа -->
+<div class="modal" id="orderModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="orderModalTitle">Новый заказ</h3>
+      <button class="modal-close" onclick="closeModal('orderModal')">×</button>
+    </div>
+    <form id="orderForm">
+      <input type="hidden" id="orderId">
+      <div class="form-group">
+        <label>Клиент</label>
+        <input type="text" id="orderClient" required>
+      </div>
+      <div class="form-group">
+        <label>Товар</label>
+        <input type="text" id="orderProduct" required>
+      </div>
+      <div class="grid grid-2">
+        <div class="form-group">
+          <label>Сумма (₽)</label>
+          <input type="number" id="orderAmount" required>
+        </div>
+        <div class="form-group">
+          <label>Статус</label>
+          <select id="orderStatus">
+            <option value="new">Новый</option>
+            <option value="processing">В работе</option>
+            <option value="done">Выполнен</option>
+            <option value="cancelled">Отменён</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full">Сохранить</button>
+    </form>
+  </div>
+</div>
+
+<!-- Модальное окно товара -->
+<div class="modal" id="productModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="productModalTitle">Новый товар</h3>
+      <button class="modal-close" onclick="closeModal('productModal')">×</button>
+    </div>
+    <form id="productForm">
+      <input type="hidden" id="productId">
+      <div class="form-group">
+        <label>Название</label>
+        <input type="text" id="productName" required>
+      </div>
+      <div class="grid grid-2">
+        <div class="form-group">
+          <label>Категория</label>
+          <select id="productCategory">
+            <option value="ecoleather">Экокожа</option>
+            <option value="alcantara">Алькантара</option>
+            <option value="marble">Гибкий мрамор</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Цена (₽)</label>
+          <input type="number" id="productPrice" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Статус</label>
+        <select id="productStatus">
+          <option value="active">Активен</option>
+          <option value="hidden">Скрыт</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full">Сохранить</button>
+    </form>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script src="auth.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

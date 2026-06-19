@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Вход в админ-панель | Автотекс19</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section class="admin-auth-wrapper">
+  <div class="admin-auth-card">
+    <div class="admin-auth-logo">
+      <span class="admin-shield">🛡️</span>
+      <h2>Админ-панель</h2>
+      <p class="text-secondary">Автотекс19 — система управления</p>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-tab="admin-login">Вход</button>
+      <button class="auth-tab" data-tab="admin-register">Регистрация админа</button>
+    </div>
+
+    <!-- Вход -->
+    <form id="adminLoginForm" class="auth-form active">
+      <div class="form-group">
+        <label>Логин администратора</label>
+        <input type="text" id="adminUsername" required placeholder="admin">
+      </div>
+      <div class="form-group">
+        <label>Пароль</label>
+        <input type="password" id="adminPassword" required placeholder="••••••••">
+      </div>
+      <div id="adminLoginError" class="alert alert-error" style="display:none;"></div>
+      <button type="submit" class="btn btn-primary btn-full btn-large">Войти в панель</button>
+      <p class="form-note">
+        <a href="login.html">← Вернуться на сайт</a>
+      </p>
+    </form>
+
+    <!-- Регистрация админа -->
+    <form id="adminRegisterForm" class="auth-form">
+      <div class="form-group">
+        <label>Логин</label>
+        <input type="text" id="adminRegUsername" required minlength="3">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="adminRegEmail" required>
+      </div>
+      <div class="form-group">
+        <label>Секретный код</label>
+        <input type="text" id="adminRegSecret" required placeholder="Код доступа от руководства">
+      </div>
+      <div class="form-group">
+        <label>Пароль</label>
+        <input type="password" id="adminRegPassword" required minlength="6">
+      </div>
+      <div id="adminRegisterError" class="alert alert-error" style="display:none;"></div>
+      <div id="adminRegisterSuccess" class="alert" style="display:none;"></div>
+      <button type="submit" class="btn btn-primary btn-full btn-large">Зарегистрироваться</button>
+      <p class="form-note">Регистрация доступна только по секретному коду</p>
+    </form>
+  </div>
+</section>
+
+<script src="script.js"></script>
+<script src="auth.js"></script>
+<script src="admin-auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Портфолио Автотекс19. Примеры установленных чехлов и отделки.">
+    <title>Портфолио | Автотекс19</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div class="container nav-wrapper">
+        <a href="index.html" class="logo">Автотекс<span>19</span></a>
+        
+        <!-- Бургер-меню -->
+        <button class="burger" id="burger" aria-label="Открыть меню">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <nav>
+            <ul id="nav-menu">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+                <li><a href="services.html">Услуги</a></li>
+                <li><a href="portfolio.html">Работы</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+                
+                <!-- Кнопка смены темы в мобильном меню -->
+                <li class="theme-item">
+                    <button class="theme-toggle-mobile" id="theme-toggle-mobile" aria-label="Переключить тему">
+                        <span>Сменить тему</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+        
+        <!-- Кнопка темы для десктопа -->
+        <button class="theme-toggle" id="theme-toggle-desktop" onclick="toggleTheme()" aria-label="Переключить тему">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+            </svg>
+        </button>
+    </div>
+</header>
+
+    <main>
+        <section class="hero-small">
+            <div class="container">
+                <span class="badge">Наши работы</span>
+                <h1>Портфолио</h1>
+                <p class="text-secondary">Реальные примеры установленных чехлов и отделки</p>
+            </div>
+        </section>
+
+        <section class="portfolio-section">
+            <div class="container">
+                <div class="filter-tabs">
+                    <button class="tab-btn active" data-filter="all">Все работы</button>
+                    <button class="tab-btn" data-filter="ecoleather">Экокожа</button>
+                    <button class="tab-btn" data-filter="alcantara">Алькантара</button>
+                    <button class="tab-btn" data-filter="marble">Гибкий мрамор</button>
+                </div>
+
+                <div class="grid grid-3" id="portfolio-grid">
+                    <div class="card portfolio-card" data-category="ecoleather">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&h=400&fit=crop" alt="BMW X5">
+                            <div class="portfolio-overlay">
+                                <span class="badge">Экокожа</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>BMW X5</h3>
+                            <p class="text-secondary">Черные чехлы с красной прострочкой</p>
+                            <p><strong>Материал:</strong> Экокожа Премиум</p>
+                            <p><strong>Комплектация:</strong> Полный салон</p>
+                        </div>
+                    </div>
+
+                    <div class="card portfolio-card" data-category="alcantara">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?w=600&h=400&fit=crop" alt="Mercedes E-Class">
+                            <div class="portfolio-overlay">
+                                <span class="badge">Алькантара</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Mercedes E-Class</h3>
+                            <p class="text-secondary">Комбинированные чехлы алькантара + экокожа</p>
+                            <p><strong>Материал:</strong> Алькантара Люкс</p>
+                            <p><strong>Цвет:</strong> Графит + черный</p>
+                        </div>
+                    </div>
+
+                    <div class="card portfolio-card" data-category="marble">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&h=400&fit=crop" alt="Отделка мрамором">
+                            <div class="portfolio-overlay">
+                                <span class="badge">Гибкий мрамор</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Отделка ванной комнаты</h3>
+                            <p class="text-secondary">Облицовка стен гибким мрамором Каррара</p>
+                            <p><strong>Площадь:</strong> 18 м²</p>
+                            <p><strong>Материал:</strong> Гибкий мрамор</p>
+                        </div>
+                    </div>
+
+                    <div class="card portfolio-card" data-category="ecoleather">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600&h=400&fit=crop" alt="Toyota Camry">
+                            <div class="portfolio-overlay">
+                                <span class="badge">Экокожа</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Toyota Camry</h3>
+                            <p class="text-secondary">Бежевые чехлы с ромбовидной прострочкой</p>
+                            <p><strong>Материал:</strong> Экокожа Комфорт</p>
+                            <p><strong>Комплектация:</strong> Полный салон</p>
+                        </div>
+                    </div>
+
+                    <div class="card portfolio-card" data-category="alcantara">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&h=400&fit=crop" alt="Audi Q7">
+                            <div class="portfolio-overlay">
+                                <span class="badge">Алькантара</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Audi Q7</h3>
+                            <p class="text-secondary">Спортивные сиденья с алькантарой</p>
+                            <p><strong>Материал:</strong> Алькантара + перфорация</p>
+                            <p><strong>Цвет:</strong> Черный + синяя прострочка</p>
+                        </div>
+                    </div>
+
+                    <div class="card portfolio-card" data-category="ecoleather">
+                        <div class="portfolio-image">
+                            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&h=400&fit=crop" alt="Kia K5">
+                            <div class="portfolio-overlay">
+                                <span class="badge">Экокожа</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Kia K5</h3>
+                            <p class="text-secondary">Двухцветные чехлы с логотипом</p>
+                            <p><strong>Материал:</strong> Экокожа Спорт</p>
+                            <p><strong>Цвет:</strong> Черный + коричневый</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <div class="card cta-card">
+                    <h2>Хотите такой же результат?</h2>
+                    <p class="text-secondary">Запишитесь на бесплатную консультацию и подбор чехлов</p>
+                    <a href="contacts.html" class="btn btn-primary btn-large">Оставить заявку</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>Автотекс19</h3>
+                    <p class="text-secondary">Автомобильные чехлы премиум класса и отделочные материалы.</p>
+                </div>
+                <div>
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="catalog.html">Каталог</a></li>
+                        <li><a href="services.html">Услуги</a></li>
+                        <li><a href="portfolio.html">Работы</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Контакты</h4>
+                    <ul class="footer-links">
+                        <li>г. Москва, ул. Автомобильная, 15</li>
+                        <li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li>
+                        <li><a href="mailto:info@avtotex19.ru">info@avtotex19.ru</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Автотекс19. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

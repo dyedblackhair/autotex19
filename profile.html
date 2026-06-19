@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Личный кабинет | Автотекс19</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="container nav-wrapper">
+    <a href="index.html" class="logo">Автотекс<span>19</span></a>
+    <nav>
+      <ul id="nav-menu">
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="catalog.html">Каталог</a></li>
+        <li><a href="services.html">Услуги</a></li>
+        <li><a href="portfolio.html">Работы</a></li>
+        <li><a href="contacts.html">Контакты</a></li>
+      </ul>
+    </nav>
+    <div style="display:flex; gap:12px; align-items:center;">
+      <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+      <button class="burger" id="burger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero-small">
+  <div class="container">
+    <span class="badge">Профиль</span>
+    <h1 id="profileTitle">Личный кабинет</h1>
+    <p class="text-secondary" id="profileSubtitle">Управляйте заказами и личными данными</p>
+  </div>
+</section>
+
+<section style="padding: 40px 0 80px;">
+  <div class="container">
+    <div class="profile-layout">
+      <!-- Sidebar профиля -->
+      <aside class="profile-sidebar card">
+        <div class="profile-avatar" id="profileAvatar">И</div>
+        <h3 id="profileName" style="text-align:center; margin-bottom:4px;">Имя</h3>
+        <p class="text-secondary" id="profileEmail" style="text-align:center; font-size:0.9rem; margin-bottom:24px;">email@mail.ru</p>
+        <nav class="profile-nav">
+          <button class="profile-nav-btn active" data-section="orders">📦 Мои заказы</button>
+          <button class="profile-nav-btn" data-section="info">👤 Личные данные</button>
+          <button class="profile-nav-btn" data-section="security">🔒 Безопасность</button>
+        </nav>
+        <button class="btn btn-secondary btn-full" onclick="logout()" style="margin-top:24px;">Выйти</button>
+      </aside>
+
+      <!-- Контент -->
+      <main class="profile-content">
+        <!-- Заказы -->
+        <div class="profile-section active" id="section-orders">
+          <div class="card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+              <h2 style="margin:0;">Мои заказы</h2>
+              <span class="badge" id="ordersCount">0 заказов</span>
+            </div>
+            <div id="ordersList"></div>
+          </div>
+        </div>
+
+        <!-- Личные данные -->
+        <div class="profile-section" id="section-info">
+          <div class="card">
+            <h2 style="margin-bottom:24px;">Личные данные</h2>
+            <form id="profileForm">
+              <div class="grid grid-2">
+                <div class="form-group">
+                  <label>Имя</label>
+                  <input type="text" id="editName" required>
+                </div>
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" id="editEmail" required>
+                </div>
+                <div class="form-group">
+                  <label>Телефон</label>
+                  <input type="tel" id="editPhone" class="phone-input">
+                </div>
+                <div class="form-group">
+                  <label>Город</label>
+                  <input type="text" id="editCity" placeholder="Москва">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Адрес</label>
+                <input type="text" id="editAddress" placeholder="Улица, дом, квартира">
+              </div>
+              <div id="profileSuccess" class="alert" style="display:none;">Данные успешно сохранены</div>
+              <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Безопасность -->
+        <div class="profile-section" id="section-security">
+          <div class="card">
+            <h2 style="margin-bottom:24px;">Смена пароля</h2>
+            <form id="passwordForm">
+              <div class="form-group">
+                <label>Текущий пароль</label>
+                <input type="password" id="oldPassword" required>
+              </div>
+              <div class="form-group">
+                <label>Новый пароль</label>
+                <input type="password" id="newPassword" required minlength="6">
+              </div>
+              <div class="form-group">
+                <label>Повторите новый пароль</label>
+                <input type="password" id="newPassword2" required minlength="6">
+              </div>
+              <div id="passwordError" class="alert alert-error" style="display:none;"></div>
+              <div id="passwordSuccess" class="alert" style="display:none;">Пароль успешно изменён</div>
+              <button type="submit" class="btn btn-primary">Изменить пароль</button>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom">© 2026 Автотекс19. Все права защищены.</div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="auth.js"></script>
+<script src="profile.js"></script>
+</body>
+</html>

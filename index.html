@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Автотекс19 - автомобильные чехлы премиум класса и гибкий мрамор. Индивидуальный пошив, установка.">
+    <title>Автотекс19 - Автомобильные чехлы премиум класса</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div class="container nav-wrapper">
+        <a href="index.html" class="logo">Автотекс<span>19</span></a>
+        
+        <!-- Бургер-меню -->
+        <button class="burger" id="burger" aria-label="Открыть меню">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <nav>
+            <ul id="nav-menu">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+                <li><a href="services.html">Услуги</a></li>
+                <li><a href="portfolio.html">Работы</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+                
+                <!-- Кнопка смены темы в мобильном меню -->
+                <li class="theme-item">
+                    <button class="theme-toggle-mobile" id="theme-toggle-mobile" aria-label="Переключить тему">
+                        <span>Сменить тему</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+        
+        <!-- Кнопка темы для десктопа -->
+        <button class="theme-toggle" id="theme-toggle-desktop" onclick="toggleTheme()" aria-label="Переключить тему">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+            </svg>
+        </button>
+    </div>
+</header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <span class="badge">Премиум качество</span>
+                    <h1>Автомобильные чехлы, которые преобразят ваш салон</h1>
+                    <p class="text-secondary">Индивидуальный пошив чехлов из экокожи, алькантары и велюра. Идеальная посадка на любую марку автомобиля. Также в наличии гибкий мрамор для отделки.</p>
+                    <div class="hero-buttons">
+                        <a href="catalog.html" class="btn btn-primary">Выбрать чехлы</a>
+                        <a href="contacts.html" class="btn btn-secondary">Бесплатная консультация</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&h=600&fit=crop" alt="Автомобильные чехлы в салоне">
+                </div>
+            </div>
+        </section>
+
+        <section class="products-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Наша продукция</h2>
+                    <p class="text-secondary">Качественные материалы для вашего автомобиля и дома</p>
+                </div>
+                <div class="grid grid-3">
+                    <div class="card product-card">
+                        <span class="badge">Хит продаж</span>
+                        <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400&h=300&fit=crop" alt="Чехлы из экокожи" class="product-image">
+                        <h3>Чехлы из экокожи</h3>
+                        <p class="text-secondary">Премиальные автомобильные чехлы из высококачественной экокожи. Износостойкость, легкий уход, роскошный вид.</p>
+                        <ul class="specs">
+                            <li>Идеальная посадка по лекалам</li>
+                            <li>Срок службы 5-7 лет</li>
+                            <li>Более 50 цветов на выбор</li>
+                        </ul>
+                        <a href="catalog.html" class="btn btn-secondary">В каталог</a>
+                    </div>
+                    <div class="card product-card">
+                        <span class="badge new">Новинка</span>
+                        <img src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?w=400&h=300&fit=crop" alt="Чехлы из алькантары" class="product-image">
+                        <h3>Чехлы из алькантары</h3>
+                        <p class="text-secondary">Элитная отделка салона искусственной замшей. Тактильный комфорт и премиальный внешний вид.</p>
+                        <ul class="specs">
+                            <li>Приятная на ощупь поверхность</li>
+                            <li>Не скользит и не нагревается</li>
+                            <li>Эффектный спортивный стиль</li>
+                        </ul>
+                        <a href="catalog.html" class="btn btn-secondary">В каталог</a>
+                    </div>
+                    <div class="card product-card">
+                        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&h=300&fit=crop" alt="Гибкий мрамор" class="product-image">
+                        <h3>Гибкий мрамор</h3>
+                        <p class="text-secondary">Инновационный отделочный материал для интерьера. Имитация натурального камня с гибкостью обоев.</p>
+                        <ul class="specs">
+                            <li>Натуральная кварцевая крошка</li>
+                            <li>Легкий монтаж на любые поверхности</li>
+                            <li>Влагостойкость и долговечность</li>
+                        </ul>
+                        <a href="catalog.html" class="btn btn-secondary">В каталог</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="advantages-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Почему выбирают нас</h2>
+                    <p class="text-secondary">Более 10 лет создаем комфорт в автомобилях</p>
+                </div>
+                <div class="grid grid-4">
+                    <div class="card advantage-card">
+                        <div class="icon">✂️</div>
+                        <h3>Индивидуальный пошив</h3>
+                        <p class="text-secondary">Шьем чехлы точно по размерам вашего авто с учетом всех особенностей</p>
+                    </div>
+                    <div class="card advantage-card">
+                        <div class="icon">✓</div>
+                        <h3>Гарантия качества</h3>
+                        <p class="text-secondary">Предоставляем гарантию до 2 лет на всю продукцию</p>
+                    </div>
+                    <div class="card advantage-card">
+                        <div class="icon">🚗</div>
+                        <h3>Профессиональная установка</h3>
+                        <p class="text-secondary">Аккуратный монтаж чехлов опытными мастерами за 2-4 часа</p>
+                    </div>
+                    <div class="card advantage-card">
+                        <div class="icon">💰</div>
+                        <h3>Доступные цены</h3>
+                        <p class="text-secondary">Прямое производство без посредников. Рассрочка 0%</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>Автотекс19</h3>
+                    <p class="text-secondary">Автомобильные чехлы премиум класса и отделочные материалы.</p>
+                </div>
+                <div>
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="catalog.html">Каталог</a></li>
+                        <li><a href="services.html">Услуги</a></li>
+                        <li><a href="portfolio.html">Работы</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Контакты</h4>
+                    <ul class="footer-links">
+                        <li>г. Москва, ул. Автомобильная, 15</li>
+                        <li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li>
+                        <li><a href="mailto:info@avtotex19.ru">info@avtotex19.ru</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Автотекс19. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

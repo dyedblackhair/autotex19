@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Оформление заказа | Автотекс19</title>
+<style>
+/* ============ ПЕРЕМЕННЫЕ ============ */
+:root {
+  --bg-primary: #F8FAFC;
+  --bg-surface: #FFFFFF;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --accent: #0D9488;
+  --accent-hover: #0F766E;
+  --accent-light: rgba(13,148,136,0.08);
+  --border: #E2E8F0;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+  --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.05);
+  --radius: 6px;
+  --radius-lg: 12px;
+  --error: #EF4444;
+  --success: #10B981;
+}
+[data-theme="dark"] {
+  --bg-primary: #0F172A;
+  --bg-surface: #1E293B;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --accent: #2DD4BF;
+  --accent-hover: #14B8A6;
+  --accent-light: rgba(45,212,191,0.1);
+  --border: #334155;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+  --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.4);
+}
+
+/* ============ RESET ============ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s, color 0.3s;
+}
+a { text-decoration: none; color: inherit; transition: color 0.2s; }
+a:hover { color: var(--accent); }
+img { max-width: 100%; }
+button { font-family: inherit; cursor: pointer; }
+
+/* ============ HEADER ============ */
+header {
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 72px;
+}
+.logo { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; }
+.logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a { font-weight: 500; font-size: 0.95rem; }
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 8px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  font-size: 1rem;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ============ BREADCRUMB ============ */
+.breadcrumb {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 24px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.breadcrumb a { color: var(--text-secondary); }
+.breadcrumb a:hover { color: var(--accent); }
+.breadcrumb .sep { opacity: 0.4; }
+
+/* ============ MAIN CONTAINER ============ */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+  width: 100%;
+  flex-grow: 1;
+}
+
+/* ============ PAGE: CHECKOUT ============ */
+.page { display: none; }
+.page.active { display: block; animation: pageIn 0.4s ease; }
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.checkout-title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+.checkout-subtitle {
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+  font-size: 1.05rem;
+}
+
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 32px;
+  align-items: start;
+}
+
+/* ============ FORM CARD ============ */
+.form-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow);
+}
+.form-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.form-card h3 .step-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group { margin-bottom: 20px; }
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+.form-group label .required { color: var(--error); }
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+.form-group input.error,
+.form-group select.error {
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.1);
+}
+.form-group .error-text {
+  color: var(--error);
+  font-size: 0.8rem;
+  margin-top: 4px;
+  display: none;
+}
+.form-group .error-text.visible { display: block; }
+.form-group textarea { resize: vertical; min-height: 80px; }
+
+/* ============ PAYMENT OPTIONS ============ */
+.payment-options { display: flex; flex-direction: column; gap: 10px; }
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.payment-option:hover { border-color: var(--accent); }
+.payment-option.selected {
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+.payment-option input[type="radio"] { display: none; }
+.payment-radio {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.payment-option.selected .payment-radio {
+  border-color: var(--accent);
+}
+.payment-option.selected .payment-radio::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.payment-icon { font-size: 1.4rem; }
+.payment-label { font-weight: 500; font-size: 0.95rem; }
+.payment-desc { font-size: 0.8rem; color: var(--text-secondary); }
+
+/* ============ ORDER SUMMARY SIDEBAR ============ */
+.summary-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 96px;
+}
+.summary-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.summary-item:last-of-type { border-bottom: none; }
+.summary-item-info { flex: 1; }
+.summary-item-name { font-weight: 600; font-size: 0.95rem; }
+.summary-item-meta { font-size: 0.8rem; color: var(--text-secondary); margin-top: 2px; }
+.summary-item-price { font-weight: 700; font-size: 1rem; white-space: nowrap; margin-left: 16px; }
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 0.95rem;
+}
+.summary-row.total {
+  padding-top: 16px;
+  margin-top: 8px;
+  border-top: 2px solid var(--border);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.summary-row.total .total-price { color: var(--accent); }
+
+.summary-empty {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--text-secondary);
+}
+.summary-empty .icon { font-size: 2.5rem; margin-bottom: 8px; }
+
+/* ============ BUTTONS ============ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  gap: 8px;
+  transition: all 0.2s;
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+.btn-primary:active { transform: translateY(0); }
+.btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text-primary); }
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+.btn-full { width: 100%; }
+.btn-large { padding: 16px 32px; font-size: 1.1rem; }
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* ============ CHECKBOX ============ */
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 20px 0;
+}
+.checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--accent);
+  flex-shrink: 0;
+}
+.checkbox-group label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  line-height: 1.5;
+}
+.checkbox-group label a { color: var(--accent); text-decoration: underline; }
+
+/* ============ PAGE: CONFIRMATION ============ */
+.confirm-wrapper {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+.confirm-icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 28px;
+  font-size: 3rem;
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes popIn {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.confirm-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+.confirm-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  margin-bottom: 36px;
+}
+.confirm-order-number {
+  display: inline-block;
+  background: var(--accent-light);
+  color: var(--accent);
+  padding: 8px 20px;
+  border-radius: 99px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 32px;
+}
+
+.confirm-details {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  text-align: left;
+  box-shadow: var(--shadow);
+  margin-bottom: 32px;
+}
+.confirm-details h3 {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.confirm-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.95rem;
+}
+.confirm-row:last-child { border-bottom: none; }
+.confirm-row .label { color: var(--text-secondary); }
+.confirm-row .value { font-weight: 600; text-align: right; }
+.confirm-row.total {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-top: 8px;
+  padding-top: 14px;
+  border-top: 2px solid var(--border);
+  border-bottom: none;
+}
+.confirm-row.total .value { color: var(--accent); }
+
+.confirm-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: rgba(59,130,246,0.1);
+  color: #3B82F6;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ============ PRODUCT PICKER (in form) ============ */
+.product-picker { display: flex; flex-direction: column; gap: 10px; }
+.product-pick {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.product-pick:hover { border-color: var(--accent); background: var(--accent-light); }
+.product-pick.selected { border-color: var(--accent); background: var(--accent-light); }
+.product-pick input[type="radio"] { display: none; }
+.product-pick-check {
+  width: 22px; height: 22px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.product-pick.selected .product-pick-check {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+.product-pick.selected .product-pick-check::after { content: '✓'; font-size: 0.8rem; font-weight: 700; }
+.product-pick-info { flex: 1; }
+.product-pick-name { font-weight: 600; font-size: 0.95rem; }
+.product-pick-cat { font-size: 0.8rem; color: var(--text-secondary); }
+.product-pick-price { font-weight: 700; color: var(--accent); white-space: nowrap; }
+
+/* ============ FOOTER ============ */
+footer {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+  padding: 32px 24px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-top: auto;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  .checkout-layout { grid-template-columns: 1fr; }
+  .summary-card { position: static; order: -1; }
+  .nav-links { display: none; }
+}
+@media (max-width: 600px) {
+  .form-row { grid-template-columns: 1fr; }
+  .checkout-title { font-size: 1.5rem; }
+  .form-card, .summary-card, .confirm-details { padding: 20px; }
+  .confirm-actions { flex-direction: column; }
+  .confirm-actions .btn { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="nav-wrapper">
+    <a href="index.html" class="logo">Автотекс<span>19</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="catalog.html">Каталог</a></li>
+      <li><a href="services.html">Услуги</a></li>
+      <li><a href="portfolio.html">Работы</a></li>
+      <li><a href="contacts.html">Контакты</a></li>
+    </ul>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Сменить тему">🌓</button>
+  </div>
+</header>
+
+<!-- ============ BREADCRUMB ============ -->
+<div class="breadcrumb" id="breadcrumb">
+  <a href="index.html">Главная</a>
+  <span class="sep">/</span>
+  <a href="catalog.html">Каталог</a>
+  <span class="sep">/</span>
+  <span id="breadcrumbCurrent">Оформление заказа</span>
+</div>
+
+<!-- ============ MAIN ============ -->
+<div class="main-content">
+
+  <!-- ===================== СТРАНИЦА 1: ОФОРМЛЕНИЕ ===================== -->
+  <div class="page active" id="page-checkout">
+    <h1 class="checkout-title">Оформление заказа</h1>
+    <p class="checkout-subtitle">Заполните данные для оформления. Мы свяжемся с вами для подтверждения.</p>
+
+    <div class="checkout-layout">
+      <!-- ЛЕВАЯ КОЛОНКА: ФОРМА -->
+      <div>
+        <!-- Выбор товара -->
+        <div class="form-card" style="margin-bottom:24px;">
+          <h3><span class="step-badge">1</span> Выберите товар</h3>
+          <div class="product-picker" id="productPicker"></div>
+          <div class="error-text" id="productError">Выберите товар для заказа</div>
+        </div>
+
+        <!-- Контактные данные -->
+        <div class="form-card" style="margin-bottom:24px;">
+          <h3><span class="step-badge">2</span> Контактные данные</h3>
+          <form id="checkoutForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Имя <span class="required">*</span></label>
+                <input type="text" id="cName" placeholder="Иван Иванов" required>
+                <div class="error-text">Введите имя</div>
+              </div>
+              <div class="form-group">
+                <label>Телефон <span class="required">*</span></label>
+                <input type="tel" id="cPhone" placeholder="+7 (___) ___-__-__" required>
+                <div class="error-text">Введите телефон</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" id="cEmail" placeholder="example@mail.ru">
+            </div>
+            <div class="form-group">
+              <label>Марка и модель автомобиля <span class="required">*</span></label>
+              <input type="text" id="cCar" placeholder="Например: Toyota Camry 2022" required>
+              <div class="error-text">Укажите автомобиль</div>
+            </div>
+            <div class="form-group">
+              <label>Адрес установки / доставки</label>
+              <input type="text" id="cAddress" placeholder="Город, улица, дом">
+            </div>
+            <div class="form-group">
+              <label>Комментарий к заказу</label>
+              <textarea id="cComment" placeholder="Пожелания по цвету, срокам, особые требования..."></textarea>
+            </div>
+          </form>
+        </div>
+
+        <!-- Способ оплаты -->
+        <div class="form-card" style="margin-bottom:24px;">
+          <h3><span class="step-badge">3</span> Способ оплаты</h3>
+          <div class="payment-options">
+            <label class="payment-option selected" data-method="cash">
+              <input type="radio" name="payment" value="cash" checked>
+              <span class="payment-radio"></span>
+              <span class="payment-icon">💵</span>
+              <div>
+                <div class="payment-label">Наличные</div>
+                <div class="payment-desc">Оплата при получении / установке</div>
+              </div>
+            </label>
+            <label class="payment-option" data-method="card">
+              <input type="radio" name="payment" value="card">
+              <span class="payment-radio"></span>
+              <span class="payment-icon">💳</span>
+              <div>
+                <div class="payment-label">Банковская карта</div>
+                <div class="payment-desc">Оплата картой при получении</div>
+              </div>
+            </label>
+            <label class="payment-option" data-method="transfer">
+              <input type="radio" name="payment" value="transfer">
+              <span class="payment-radio"></span>
+              <span class="payment-icon">🏦</span>
+              <div>
+                <div class="payment-label">Перевод на счёт</div>
+                <div class="payment-desc">Предоплата по реквизитам</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Согласие -->
+        <div class="checkbox-group">
+          <input type="checkbox" id="cAgree" checked>
+          <label for="cAgree">Я соглашаюсь на обработку <a href="#">персональных данных</a> и принимаю условия <a href="#">публичной оферты</a></label>
+        </div>
+
+        <button class="btn btn-primary btn-full btn-large" onclick="submitOrder()" id="submitBtn">
+          Оформить заказ
+        </button>
+      </div>
+
+      <!-- ПРАВАЯ КОЛОНКА: ИТОГО -->
+      <aside>
+        <div class="summary-card">
+          <h3>🛒 Ваш заказ</h3>
+          <div id="summaryContent">
+            <div class="summary-empty">
+              <div class="icon">📦</div>
+              <p>Выберите товар из списка</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- ===================== СТРАНИЦА 2: ПОДТВЕРЖДЕНИЕ ===================== -->
+  <div class="page" id="page-confirm">
+    <div class="confirm-wrapper">
+      <div class="confirm-icon">✓</div>
+      <h1 class="confirm-title">Заказ оформлен!</h1>
+      <p class="confirm-subtitle">Спасибо за заказ! Мы свяжемся с вами в течение 30 минут для подтверждения.</p>
+      <div class="confirm-order-number" id="confirmOrderNumber">Заказ #0000</div>
+
+      <div class="confirm-details">
+        <h3>📋 Детали заказа</h3>
+        <div id="confirmDetails"></div>
+      </div>
+
+      <div class="confirm-actions">
+        <a href="catalog.html" class="btn btn-primary">← Вернуться в каталог</a>
+        <a href="index.html" class="btn btn-secondary">На главную</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  © 2026 Автотекс19. Все права защищены.
+</footer>
+
+<script>
+/* ============ ТЕМА ============ */
+function toggleTheme() {
+  const html = document.documentElement;
+  const t = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', t);
+  localStorage.setItem('theme', t);
+}
+document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'light');
+
+/* ============ БАЗА ДАННЫХ ============ */
+const DB = {
+  getProducts: () => JSON.parse(localStorage.getItem('atx_products') || '[]'),
+  getOrders: () => JSON.parse(localStorage.getItem('atx_orders') || '[]'),
+  setOrders: (o) => localStorage.setItem('atx_orders', JSON.stringify(o)),
+};
+
+/* ============ ТОВАРЫ ============ */
+const catNames = { ecoleather: 'Экокожа', alcantara: 'Алькантара', marble: 'Гибкий мрамор' };
+let products = DB.getProducts().filter(p => p.status === 'active');
+
+// Если нет товаров в localStorage — используем дефолтные
+if (products.length === 0) {
+  products = [
+    { id: 1, name: 'Чехлы «Премиум»', category: 'ecoleather', price: 12900, status: 'active' },
+    { id: 2, name: 'Чехлы «Спорт»', category: 'ecoleather', price: 14500, status: 'active' },
+    { id: 3, name: 'Чехлы «Алькантара Люкс»', category: 'alcantara', price: 24900, status: 'active' },
+    { id: 4, name: 'Гибкий мрамор «Каррара»', category: 'marble', price: 2100, status: 'active' },
+    { id: 5, name: 'Чехлы «Комфорт»', category: 'ecoleather', price: 8900, status: 'active' },
+    { id: 6, name: 'Гибкий мрамор «Оникс»', category: 'marble', price: 2400, status: 'active' },
+  ];
+}
+
+let selectedProduct = null;
+
+// Проверяем, был ли передан товар из каталога
+const preselected = localStorage.getItem('atx_checkout_product');
+if (preselected) {
+  try {
+    selectedProduct = JSON.parse(preselected);
+    localStorage.removeItem('atx_checkout_product');
+  } catch(e) {}
+}
+
+/* ============ РЕНДЕР СПИСКА ТОВАРОВ ============ */
+function renderProductPicker() {
+  const picker = document.getElementById('productPicker');
+  picker.innerHTML = products.map(p => `
+    <label class="product-pick ${selectedProduct?.id === p.id ? 'selected' : ''}" data-id="${p.id}">
+      <input type="radio" name="product" value="${p.id}" ${selectedProduct?.id === p.id ? 'checked' : ''}>
+      <span class="product-pick-check"></span>
+      <div class="product-pick-info">
+        <div class="product-pick-name">${p.name}</div>
+        <div class="product-pick-cat">${catNames[p.category] || p.category}</div>
+      </div>
+      <div class="product-pick-price">${formatPrice(p.price)}</div>
+    </label>
+  `).join('');
+
+  picker.querySelectorAll('.product-pick').forEach(el => {
+    el.addEventListener('click', () => {
+      picker.querySelectorAll('.product-pick').forEach(x => x.classList.remove('selected'));
+      el.classList.add('selected');
+      el.querySelector('input').checked = true;
+      const id = +el.dataset.id;
+      selectedProduct = products.find(p => p.id === id);
+      renderSummary();
+      document.getElementById('productError').classList.remove('visible');
+    });
+  });
+}
+
+/* ============ ИТОГО ============ */
+function renderSummary() {
+  const el = document.getElementById('summaryContent');
+  if (!selectedProduct) {
+    el.innerHTML = '<div class="summary-empty"><div class="icon">📦</div><p>Выберите товар из списка</p></div>';
+    return;
+  }
+  const delivery = 0;
+  const total = selectedProduct.price + delivery;
+  el.innerHTML = `
+    <div class="summary-item">
+      <div class="summary-item-info">
+        <div class="summary-item-name">${selectedProduct.name}</div>
+        <div class="summary-item-meta">${catNames[selectedProduct.category] || selectedProduct.category}</div>
+      </div>
+      <div class="summary-item-price">${formatPrice(selectedProduct.price)}</div>
+    </div>
+    <div style="padding-top:12px;">
+      <div class="summary-row">
+        <span>Товар</span>
+        <span>${formatPrice(selectedProduct.price)}</span>
+      </div>
+      <div class="summary-row">
+        <span>Доставка / установка</span>
+        <span style="color:var(--success);">Бесплатно</span>
+      </div>
+      <div class="summary-row total">
+        <span>Итого</span>
+        <span class="total-price">${formatPrice(total)}</span>
+      </div>
+    </div>
+  `;
+}
+
+/* ============ ОПЛАТА ============ */
+document.querySelectorAll('.payment-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+    opt.querySelector('input').checked = true;
+  });
+});
+
+/* ============ МАСКА ТЕЛЕФОНА ============ */
+document.getElementById('cPhone').addEventListener('input', (e) => {
+  let v = e.target.value.replace(/\D/g, '');
+  if (v.startsWith('7') || v.startsWith('8')) v = v.substring(1);
+  let f = '+7';
+  if (v.length > 0) f += ' (' + v.substring(0, 3);
+  if (v.length >= 3) f += ') ' + v.substring(3, 6);
+  if (v.length >= 6) f += '-' + v.substring(6, 8);
+  if (v.length >= 8) f += '-' + v.substring(8, 10);
+  e.target.value = f;
+});
+
+/* ============ ВАЛИДАЦИЯ И ОТПРАВКА ============ */
+function submitOrder() {
+  let valid = true;
+
+  // Товар
+  if (!selectedProduct) {
+    document.getElementById('productError').classList.add('visible');
+    valid = false;
+  }
+
+  // Поля
+  const fields = [
+    { id: 'cName', min: 2 },
+    { id: 'cPhone', min: 11 },
+    { id: 'cCar', min: 3 },
+  ];
+
+  fields.forEach(f => {
+    const input = document.getElementById(f.id);
+    const errEl = input.parentElement.querySelector('.error-text');
+    const val = input.value.trim();
+    if (val.length < f.min) {
+      input.classList.add('error');
+      if (errEl) errEl.classList.add('visible');
+      valid = false;
+    } else {
+      input.classList.remove('error');
+      if (errEl) errEl.classList.remove('visible');
+    }
+  });
+
+  // Согласие
+  if (!document.getElementById('cAgree').checked) {
+    alert('Пожалуйста, примите условия обработки персональных данных');
+    valid = false;
+  }
+
+  if (!valid) {
+    // Скроллим к первой ошибке
+    const firstErr = document.querySelector('.error, .error-text.visible');
+    if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  // Оплата
+  const payment = document.querySelector('input[name="payment"]:checked').value;
+  const paymentLabels = { cash: 'Наличные', card: 'Банковская карта', transfer: 'Перевод на счёт' };
+
+  // Формируем заказ
+  const orderId = Date.now();
+  const orderData = {
+    id: orderId,
+    client: document.getElementById('cName').value.trim(),
+    phone: document.getElementById('cPhone').value.trim(),
+    email: document.getElementById('cEmail').value.trim(),
+    car: document.getElementById('cCar').value.trim(),
+    address: document.getElementById('cAddress').value.trim(),
+    comment: document.getElementById('cComment').value.trim(),
+    product: selectedProduct.name,
+    productId: selectedProduct.id,
+    amount: selectedProduct.price,
+    payment: paymentLabels[payment],
+    status: 'new',
+    date: new Date().toISOString().split('T')[0],
+  };
+
+  // Сохраняем
+  const orders = DB.getOrders();
+  orders.push(orderData);
+  DB.setOrders(orders);
+
+  // Рендерим подтверждение
+  showConfirmation(orderData);
+}
+
+/* ============ СТРАНИЦА ПОДТВЕРЖДЕНИЯ ============ */
+function showConfirmation(order) {
+  document.getElementById('page-checkout').classList.remove('active');
+  document.getElementById('page-confirm').classList.add('active');
+  document.getElementById('breadcrumbCurrent').textContent = 'Заказ оформлен';
+
+  document.getElementById('confirmOrderNumber').textContent = `Заказ #${order.id}`;
+
+  const paymentLabels = { cash: '💵 Наличные', card: '💳 Карта', transfer: '🏦 Перевод' };
+
+  document.getElementById('confirmDetails').innerHTML = `
+    <div class="confirm-row">
+      <span class="label">Статус</span>
+      <span class="value"><span class="confirm-status">⏳ Ожидает подтверждения</span></span>
+    </div>
+    <div class="confirm-row">
+      <span class="label">Дата</span>
+      <span class="value">${formatDate(order.date)}</span>
+    </div>
+    <div class="confirm-row">
+      <span class="label">Товар</span>
+      <span class="value">${order.product}</span>
+    </div>
+    <div class="confirm-row">
+      <span class="label">Клиент</span>
+      <span class="value">${order.client}</span>
+    </div>
+    <div class="confirm-row">
+      <span class="label">Телефон</span>
+      <span class="value">${order.phone}</span>
+    </div>
+    ${order.email ? `<div class="confirm-row"><span class="label">Email</span><span class="value">${order.email}</span></div>` : ''}
+    <div class="confirm-row">
+      <span class="label">Автомобиль</span>
+      <span class="value">${order.car}</span>
+    </div>
+    ${order.address ? `<div class="confirm-row"><span class="label">Адрес</span><span class="value">${order.address}</span></div>` : ''}
+    <div class="confirm-row">
+      <span class="label">Оплата</span>
+      <span class="value">${order.payment}</span>
+    </div>
+    ${order.comment ? `<div class="confirm-row"><span class="label">Комментарий</span><span class="value" style="max-width:250px;">${order.comment}</span></div>` : ''}
+    <div class="confirm-row total">
+      <span class="label">Итого</span>
+      <span class="value">${formatPrice(order.amount)}</span>
+    </div>
+  `;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ============ УТИЛИТЫ ============ */
+function formatPrice(p) { return new Intl.NumberFormat('ru-RU').format(p) + ' ₽'; }
+function formatDate(d) {
+  const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+  const dt = new Date(d);
+  return `${dt.getDate()} ${months[dt.getMonth()]} ${dt.getFullYear()}`;
+}
+
+/* ============ ИНИЦИАЛИЗАЦИЯ ============ */
+renderProductPicker();
+renderSummary();
+
+/* Убираем ошибку при вводе */
+document.querySelectorAll('#checkoutForm input, #checkoutForm textarea').forEach(input => {
+  input.addEventListener('input', () => {
+    input.classList.remove('error');
+    const errEl = input.parentElement.querySelector('.error-text');
+    if (errEl) errEl.classList.remove('visible');
+  });
+});
+</script>
+
+</body>
+</html>

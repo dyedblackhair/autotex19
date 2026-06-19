@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Вход и регистрация | Автотекс19</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="container nav-wrapper">
+    <a href="index.html" class="logo">Автотекс<span>19</span></a>
+    <nav>
+      <ul id="nav-menu">
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="catalog.html">Каталог</a></li>
+        <li><a href="services.html">Услуги</a></li>
+        <li><a href="portfolio.html">Работы</a></li>
+        <li><a href="contacts.html">Контакты</a></li>
+      </ul>
+    </nav>
+    <div style="display:flex; gap:12px; align-items:center;">
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Сменить тему">🌓</button>
+      <button class="burger" id="burger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero-small">
+  <div class="container">
+    <span class="badge">Личный кабинет</span>
+    <h1>Добро пожаловать</h1>
+    <p class="text-secondary">Войдите или создайте аккаунт для оформления заказов</p>
+  </div>
+</section>
+
+<section style="padding: 40px 0 80px;">
+  <div class="container contact-form-wrapper">
+    <div class="auth-card">
+      <!-- Табы -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="login">Вход</button>
+        <button class="auth-tab" data-tab="register">Регистрация</button>
+      </div>
+
+      <!-- Форма входа -->
+      <form id="loginForm" class="auth-form active">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" required placeholder="example@mail.ru">
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Пароль</label>
+          <input type="password" id="loginPassword" required placeholder="••••••••">
+        </div>
+        <div id="loginError" class="alert alert-error" style="display:none;"></div>
+        <button type="submit" class="btn btn-primary btn-full btn-large">Войти</button>
+        <p class="form-note">
+          <a href="admin-login.html" style="color:var(--text-secondary); font-size:0.85rem;">Вход для администратора →</a>
+        </p>
+      </form>
+
+      <!-- Форма регистрации -->
+      <form id="registerForm" class="auth-form">
+        <div class="form-group">
+          <label for="regName">Имя</label>
+          <input type="text" id="regName" required placeholder="Иван Иванов">
+        </div>
+        <div class="form-group">
+          <label for="regEmail">Email</label>
+          <input type="email" id="regEmail" required placeholder="example@mail.ru">
+        </div>
+        <div class="form-group">
+          <label for="regPhone">Телефон</label>
+          <input type="tel" id="regPhone" class="phone-input" required placeholder="+7 (___) ___-__-__">
+        </div>
+        <div class="form-group">
+          <label for="regPassword">Пароль</label>
+          <input type="password" id="regPassword" required minlength="6" placeholder="Минимум 6 символов">
+        </div>
+        <div class="form-group">
+          <label for="regPassword2">Повторите пароль</label>
+          <input type="password" id="regPassword2" required minlength="6" placeholder="••••••••">
+        </div>
+        <div id="registerError" class="alert alert-error" style="display:none;"></div>
+        <div id="registerSuccess" class="alert" style="display:none;"></div>
+        <button type="submit" class="btn btn-primary btn-full btn-large">Создать аккаунт</button>
+        <p class="form-note">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom">© 2026 Автотекс19. Все права защищены.</div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Каталог Автотекс19. Автомобильные чехлы из экокожи и алькантары, гибкий мрамор.">
+    <title>Каталог | Автотекс19</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+    <div class="container nav-wrapper">
+        <a href="index.html" class="logo">Автотекс<span>19</span></a>
+        
+        <!-- Бургер-меню -->
+        <button class="burger" id="burger" aria-label="Открыть меню">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <nav>
+            <ul id="nav-menu">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+                <li><a href="services.html">Услуги</a></li>
+                <li><a href="portfolio.html">Работы</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+                
+                <!-- Кнопка смены темы в мобильном меню -->
+                <li class="theme-item">
+                    <button class="theme-toggle-mobile" id="theme-toggle-mobile" aria-label="Переключить тему">
+                        <span>Сменить тему</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+        
+        <!-- Кнопка темы для десктопа -->
+        <button class="theme-toggle" id="theme-toggle-desktop" onclick="toggleTheme()" aria-label="Переключить тему">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+            </svg>
+        </button>
+    </div>
+</header>
+
+    <main>
+        <section class="breadcrumb-section">
+            <div class="container">
+                <nav class="breadcrumb">
+                    <a href="index.html">Главная</a> / <span>Каталог</span>
+                </nav>
+            </div>
+        </section>
+
+        <section class="catalog-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Каталог продукции</h1>
+                    <p class="text-secondary">Выберите категорию товаров</p>
+                </div>
+
+                <div class="filter-tabs">
+                    <button class="tab-btn active" data-filter="all">Все товары</button>
+                    <button class="tab-btn" data-filter="ecoleather">Чехлы из экокожи</button>
+                    <button class="tab-btn" data-filter="alcantara">Чехлы из алькантары</button>
+                    <button class="tab-btn" data-filter="marble">Гибкий мрамор</button>
+                </div>
+
+                <div class="grid grid-3" id="catalog-grid">
+                    <div class="card product-card" data-category="ecoleather">
+                        <span class="badge">Хит</span>
+                        <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400&h=300&fit=crop" alt="Чехлы Премиум" class="product-image">
+                        <h3>Чехлы «Премиум»</h3>
+                        <p class="text-secondary">Классические автомобильные чехлы из экокожи премиум класса.</p>
+                        <ul class="specs">
+                            <li>Материал: экокожа 1.2 мм</li>
+                            <li>Комплект: передние + задние сиденья</li>
+                            <li>Цвета: черный, бежевый, коричневый</li>
+                        </ul>
+                        <div class="price">12 900 ₽</div>
+                        <button class="btn btn-primary" onclick="addToCart('Чехлы Премиум')">Заказать</button>
+                    </div>
+
+                    <div class="card product-card" data-category="ecoleather">
+                        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=400&h=300&fit=crop" alt="Чехлы Спорт" class="product-image">
+                        <h3>Чехлы «Спорт»</h3>
+                        <p class="text-secondary">Спортивные чехлы с контрастной прострочкой и логотипом.</p>
+                        <ul class="specs">
+                            <li>Материал: экокожа + перфорация</li>
+                            <li>Комплект: передние + задние сиденья</li>
+                            <li>Прострочка: красная, синяя, белая</li>
+                        </ul>
+                        <div class="price">14 500 ₽</div>
+                        <button class="btn btn-primary" onclick="addToCart('Чехлы Спорт')">Заказать</button>
+                    </div>
+
+                    <div class="card product-card" data-category="alcantara">
+                        <span class="badge new">Новинка</span>
+                        <img src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?w=400&h=300&fit=crop" alt="Чехлы Алькантара Люкс" class="product-image">
+                        <h3>Чехлы «Алькантара Люкс»</h3>
+                        <p class="text-secondary">Элитные чехлы из искусственной замши высшего качества.</p>
+                        <ul class="specs">
+                            <li>Материал: алькантара премиум</li>
+                            <li>Комплект: полный салон</li>
+                            <li>Комбинация с экокожей</li>
+                        </ul>
+                        <div class="price">24 900 ₽</div>
+                        <button class="btn btn-primary" onclick="addToCart('Чехлы Алькантара Люкс')">Заказать</button>
+                    </div>
+
+                    <div class="card product-card" data-category="marble">
+                        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&h=300&fit=crop" alt="Гибкий мрамор Каррара" class="product-image">
+                        <h3>Гибкий мрамор «Каррара»</h3>
+                        <p class="text-secondary">Имитация итальянского мрамора для отделки интерьера.</p>
+                        <ul class="specs">
+                            <li>Размер: 1200 x 600 x 2 мм</li>
+                            <li>Текстура: белый мрамор с прожилками</li>
+                            <li>Площадь: 0.72 м²</li>
+                        </ul>
+                        <div class="price">2 100 ₽ / м²</div>
+                        <button class="btn btn-primary" onclick="addToCart('Гибкий мрамор Каррара')">Заказать</button>
+                    </div>
+
+                    <div class="card product-card" data-category="ecoleather">
+                        <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=400&h=300&fit=crop" alt="Чехлы Комфорт" class="product-image">
+                        <h3>Чехлы «Комфорт»</h3>
+                        <p class="text-secondary">Бюджетные чехлы из качественной экокожи.</p>
+                        <ul class="specs">
+                            <li>Материал: экокожа 1.0 мм</li>
+                            <li>Комплект: передние + задние сиденья</li>
+                            <li>Универсальная посадка</li>
+                        </ul>
+                        <div class="price">8 900 ₽</div>
+                        <button class="btn btn-primary" onclick="addToCart('Чехлы Комфорт')">Заказать</button>
+                    </div>
+
+                    <div class="card product-card" data-category="marble">
+                        <img src="https://images.unsplash.com/photo-1616137466211-f939a420be84?w=400&h=300&fit=crop" alt="Гибкий мрамор Оникс" class="product-image">
+                        <h3>Гибкий мрамор «Оникс»</h3>
+                        <p class="text-secondary">Эксклюзивная текстура с полупрозрачными переливами.</p>
+                        <ul class="specs">
+                            <li>Размер: 1200 x 600 x 2 мм</li>
+                            <li>Текстура: оникс с подсветкой</li>
+                            <li>Площадь: 0.72 м²</li>
+                        </ul>
+                        <div class="price">2 400 ₽ / м²</div>
+                        <button class="btn btn-primary" onclick="addToCart('Гибкий мрамор Оникс')">Заказать</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>Автотекс19</h3>
+                    <p class="text-secondary">Автомобильные чехлы премиум класса и отделочные материалы.</p>
+                </div>
+                <div>
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="catalog.html">Каталог</a></li>
+                        <li><a href="services.html">Услуги</a></li>
+                        <li><a href="portfolio.html">Работы</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Контакты</h4>
+                    <ul class="footer-links">
+                        <li>г. Москва, ул. Автомобильная, 15</li>
+                        <li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li>
+                        <li><a href="mailto:info@avtotex19.ru">info@avtotex19.ru</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Автотекс19. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
