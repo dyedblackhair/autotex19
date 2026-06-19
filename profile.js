@@ -1,8 +1,6 @@
 (function() {
   const user = DB.getCurrentUser();
   if (!user) { window.location.href = 'login.html'; return; }
-
-  // Заполняем данные
   document.getElementById('profileTitle').textContent = `Привет, ${user.name.split(' ')[0]}!`;
   document.getElementById('profileName').textContent = user.name;
   document.getElementById('profileEmail').textContent = user.email;
@@ -13,8 +11,6 @@
   document.getElementById('editPhone').value = user.phone || '';
   document.getElementById('editCity').value = user.city || '';
   document.getElementById('editAddress').value = user.address || '';
-
-  // Навигация
   document.querySelectorAll('.profile-nav-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.profile-nav-btn').forEach(b => b.classList.remove('active'));
@@ -23,8 +19,6 @@
       document.getElementById('section-' + btn.dataset.section).classList.add('active');
     });
   });
-
-  // Заказы
   renderOrders();
 
   function renderOrders() {
@@ -51,8 +45,6 @@
       </div>
     `).join('');
   }
-
-  // Сохранение профиля
   document.getElementById('profileForm').addEventListener('submit', (e) => {
     e.preventDefault();
     const users = DB.getUsers();
@@ -78,8 +70,6 @@
     s.style.display = 'block';
     setTimeout(() => s.style.display = 'none', 3000);
   });
-
-  // Смена пароля
   document.getElementById('passwordForm').addEventListener('submit', (e) => {
     e.preventDefault();
     const err = document.getElementById('passwordError');
@@ -105,7 +95,6 @@
   });
 })();
 
-// ===== Утилиты =====
 function formatPrice(p) { return new Intl.NumberFormat('ru-RU').format(p) + ' ₽'; }
 function statusLabel(s) {
   return { new: 'Новый', processing: 'В работе', done: 'Выполнен', cancelled: 'Отменён' }[s] || s;
