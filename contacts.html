@@ -7,112 +7,295 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <header>
         <div class="container">
-            <a href="index.html" class="logo">Автотекс19</a>
-            <nav>
-                <a href="index.html">Главная</a>
-                <a href="catalog.html">Каталог</a>
-                <a href="services.html">Услуги</a>
-                <a href="portfolio.html">Работы</a>
-                <a href="contacts.html">Контакты</a>
-                <a href="login.html">Войти</a>
-            </nav>
-            <button class="theme-toggle">Сменить тему</button>
+            <div class="nav-wrapper">
+                <a href="index.html" class="logo">Автотекс<span>19</span></a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="catalog.html">Каталог</a></li>
+                        <li><a href="services.html">Услуги</a></li>
+                        <li><a href="portfolio.html">Работы</a></li>
+                        <li><a href="contacts.html" class="active">Контакты</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle" aria-label="Сменить тему">🌙</button>
+                <button class="burger" aria-label="Меню">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </div>
     </header>
-    <section class="hero">
-        <div class="container">
-            <h1>Свяжитесь с нами</h1>
-            <p>Мы поможем подобрать идеальные чехлы для вашего авто</p>
-        </div>
-    </section>
-    <section class="contact-info">
-        <div class="container">
-            <h2>Контактная информация</h2>
-            <div class="info-grid">
-                <div class="info-item">
-                    <h3>📍 Адрес</h3>
-                    <p>г. Москва, ул. Автомобильная, д. 15, офис 102</p>
-                    <small>Приезжайте, чтобы посмотреть образцы материалов</small>
-                </div>
-                <div class="info-item">
-                    <h3>📞 Телефоны</h3>
-                    <p><a href="tel:+74951234567">+7 (495) 123-45-67</a></p>
-                    <p><a href="tel:+79991234567">+7 (999) 123-45-67</a></p>
-                    <small>Звоните с 9:00 до 20:00 без выходных</small>
-                </div>
-                <div class="info-item">
-                    <h3>✉️ Email</h3>
-                    <p><a href="mailto:info@avtotex19.ru">info@avtotex19.ru</a></p>
-                    <small>Отправляйте фото салона для предварительной оценки</small>
-                </div>
-                <div class="info-item">
-                    <h3>🕐 Режим работы</h3>
-                    <p>Пн-Пт: 9:00 - 20:00</p>
-                    <p>Сб-Вс: 10:00 - 18:00</p>
+
+    <main>
+        <section class="hero-small">
+            <div class="container">
+                <h1>Свяжитесь с нами</h1>
+                <p class="text-secondary">Мы поможем подобрать идеальные чехлы для вашего авто</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="grid grid-2">
+                    <!-- Левая колонка: контакты -->
+                    <div>
+                        <h2>Контактная информация</h2>
+                        
+                        <div class="contact-block">
+                            <h3>📍 Адрес</h3>
+                            <p>г. Абакан, ул. Фабричная, д. 27</p>
+                            <p class="text-secondary">Приезжайте, чтобы посмотреть образцы материалов</p>
+                        </div>
+                        
+                        <div class="contact-block">
+                            <h3>📞 Телефоны</h3>
+                            <p><a href="tel:+74951234567">+7 (495) 123-45-67</a></p>
+                            <p><a href="tel:+79991234567">+7 (999) 123-45-67</a></p>
+                            <p class="text-secondary">Звоните с 9:00 до 20:00 без выходных</p>
+                        </div>
+                        
+                        <div class="contact-block">
+                            <h3>✉️ Email</h3>
+                            <p><a href="mailto:info@avtotex19.ru">info@avtotex19.ru</a></p>
+                            <p class="text-secondary">Отправляйте фото салона для предварительной оценки</p>
+                        </div>
+                        
+                        <div class="contact-block">
+                            <h3>🕐 Режим работы</h3>
+                            <p>Пн-Пт: 9:00 - 20:00</p>
+                            <p>Сб-Вс: 10:00 - 18:00</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Правая колонка: форма -->
+                    <div class="card">
+                        <h2>Оставить заявку</h2>
+                        <p class="text-secondary" style="margin-bottom: 24px;">Заполните форму, и мы перезвоним в течение 15 минут.</p>
+                        
+                        <form class="contact-form" novalidate>
+                            <div class="form-group">
+                                <label for="name">Ваше имя *</label>
+                                <input type="text" id="name" name="name" required minlength="2" maxlength="50" placeholder="Иван Иванов">
+                                <span class="form-error"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Телефон *</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="+7 (___) ___-__-__">
+                                <span class="form-error"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="material">Интересующий материал</label>
+                                <select id="material" name="material">
+                                    <option value="">Выберите материал</option>
+                                    <option value="eco">Экокожа</option>
+                                    <option value="alcantara">Алькантара</option>
+                                    <option value="velour">Велюр</option>
+                                    <option value="marble">Гибкий мрамор</option>
+                                    <option value="consult">Нужна консультация</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Сообщение</label>
+                                <textarea id="message" name="message" rows="4" placeholder="Опишите ваш запрос..."></textarea>
+                                <span class="form-error"></span>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-full">Отправить заявку</button>
+                            <p class="form-note">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</p>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="form-section">
-        <div class="container">
-            <h2>Оставить заявку</h2>
-            <p>Заполните форму, и мы перезвоним в течение 15 минут.</p>
-            <form action="#" method="POST">
-                <input type="text" name="name" placeholder="Ваше имя *" required>
-                <input type="tel" name="phone" placeholder="Телефон *" required>
-                <input type="text" name="car" placeholder="Марка и модель авто">
-                <select name="material">
-                    <option value="" disabled selected>Интересующий материал</option>
-                    <option value="eco">Экокожа</option>
-                    <option value="alcantara">Алькантара</option>
-                    <option value="velour">Велюр</option>
-                    <option value="marble">Гибкий мрамор</option>
-                    <option value="consult">Нужна консультация</option>
-                </select>
-                <textarea name="comment" placeholder="Комментарий"></textarea>
-                <button type="submit">Отправить заявку</button>
-                <small>Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</small>
-            </form>
-        </div>
-    </section>
-    <section class="map-section">
-        <div class="container">
-            <h2>Как нас найти</h2>
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2359.9479675296916!2d91.46806907675564!3d53.73700147240513!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d2c1872c44c3585%3A0x4e85aecb4a79cbf8!2sAvtoteks19!5e0!3m2!1sen!2sru!4v1781874721139!5m2!1sen!2sru" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 32px;">Как нас найти</h2>
+                <div class="map-placeholder">
+                    <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1200&h=400&fit=crop" alt="Карта">
+                    <div class="map-overlay">📍 г. Абакан, ул. Фабричная, д. 27</div>
+                </div>
             </div>
-            
-            <p>📍 г. Абакан, ул. Фабричная, д. 27</p>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer>
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <h3>Автотекс19</h3>
-                    <p>Автомобильные чехлы премиум класса и отделочные материалы.</p>
+                    <a href="index.html" class="logo">Автотекс<span>19</span></a>
+                    <p class="text-secondary" style="margin-top: 12px;">Автомобильные чехлы премиум класса и отделочные материалы.</p>
                 </div>
                 <div>
-                    <h4>Навигация</h4>
-                    <a href="index.html">Главная</a>
-                    <a href="catalog.html">Каталог</a>
-                    <a href="services.html">Услуги</a>
-                    <a href="portfolio.html">Работы</a>
+                    <h3>Навигация</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="catalog.html">Каталог</a></li>
+                        <li><a href="services.html">Услуги</a></li>
+                        <li><a href="portfolio.html">Работы</a></li>
+                    </ul>
                 </div>
                 <div>
-                    <h4>Контакты</h4>
-                    <p>г. Абкакн, ул. Фабричная, 27</p>
-                    <p><a href="tel:+74951234567">+7 (495) 123-45-67</a></p>
-                    <p><a href="mailto:info@avtotex19.ru">info@avtotex19.ru</a></p>
+                    <h3>Контакты</h3>
+                    <ul class="footer-links">
+                        <li>г. Абакан, ул. Фабричная, 27</li>
+                        <li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li>
+                        <li><a href="mailto:info@avtotex19.ru">info@avtotex19.ru</a></li>
+                    </ul>
                 </div>
             </div>
-            <p>&copy; 2026 Автотекс19. Все права защищены.</p>
+            <div class="footer-bottom">© 2026 Автотекс19. Все права защищены.</div>
         </div>
     </footer>
 
+    <script>
+        // ============ ТЕМА ============
+        const themeToggle = document.querySelector('.theme-toggle');
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        themeToggle.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            themeToggle.textContent = next === 'dark' ? '☀️' : '🌙';
+        });
+
+        // ============ БУРГЕР ============
+        const burger = document.querySelector('.burger');
+        const navList = document.querySelector('nav ul');
+        burger?.addEventListener('click', () => navList.classList.toggle('active'));
+
+        // ============ ВАЛИДАЦИЯ ФОРМЫ ============
+        const form = document.querySelector('.contact-form');
+        const nameInput = document.getElementById('name');
+        const phoneInput = document.getElementById('phone');
+        const messageInput = document.getElementById('message');
+
+        // Маска телефона
+        phoneInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.startsWith('8')) value = '7' + value.slice(1);
+            if (!value.startsWith('7') && value.length > 0) value = '7' + value;
+            
+            let formatted = '';
+            if (value.length > 0) formatted = '+7';
+            if (value.length > 1) formatted += ' (' + value.slice(1, 4);
+            if (value.length > 4) formatted += ') ' + value.slice(4, 7);
+            if (value.length > 7) formatted += '-' + value.slice(7, 9);
+            if (value.length > 9) formatted += '-' + value.slice(9, 11);
+            
+            e.target.value = formatted;
+        });
+
+        // Валидаторы
+        function validateName(value) {
+            if (!value.trim()) return 'Введите имя';
+            if (value.trim().length < 2) return 'Имя слишком короткое (мин. 2 символа)';
+            if (value.trim().length > 50) return 'Имя слишком длинное (макс. 50 символов)';
+            if (!/^[а-яА-ЯёЁa-zA-Z\s\-]+$/.test(value.trim())) return 'Только буквы, пробелы и дефис';
+            return '';
+        }
+
+        function validatePhone(value) {
+            const digits = value.replace(/\D/g, '');
+            if (!value.trim()) return 'Введите телефон';
+            if (digits.length !== 11) return 'Введите полный номер (11 цифр)';
+            return '';
+        }
+
+        function validateMessage(value) {
+            if (value.trim() && value.trim().length < 10) return 'Сообщение слишком короткое (мин. 10 символов)';
+            if (value.trim().length > 1000) return 'Сообщение слишком длинное (макс. 1000 символов)';
+            return '';
+        }
+
+        // Показ ошибок/успеха
+        function showError(input, message) {
+            const group = input.closest('.form-group');
+            const errorSpan = group.querySelector('.form-error');
+            group.classList.add('error');
+            group.classList.remove('success');
+            errorSpan.textContent = message;
+        }
+
+        function showSuccess(input) {
+            const group = input.closest('.form-group');
+            group.classList.remove('error');
+            group.classList.add('success');
+            group.querySelector('.form-error').textContent = '';
+        }
+
+        // Валидация при потере фокуса
+        nameInput.addEventListener('blur', () => {
+            const error = validateName(nameInput.value);
+            error ? showError(nameInput, error) : showSuccess(nameInput);
+        });
+
+        phoneInput.addEventListener('blur', () => {
+            const error = validatePhone(phoneInput.value);
+            error ? showError(phoneInput, error) : showSuccess(phoneInput);
+        });
+
+        messageInput.addEventListener('blur', () => {
+            const error = validateMessage(messageInput.value);
+            error ? showError(messageInput, error) : showSuccess(messageInput);
+        });
+
+        // Убираем ошибку при вводе
+        [nameInput, phoneInput, messageInput].forEach(input => {
+            input.addEventListener('input', () => {
+                const group = input.closest('.form-group');
+                if (group.classList.contains('error')) {
+                    group.classList.remove('error');
+                    group.querySelector('.form-error').textContent = '';
+                }
+            });
+        });
+
+        // Отправка формы
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let hasErrors = false;
+            
+            const nameError = validateName(nameInput.value);
+            if (nameError) { showError(nameInput, nameError); hasErrors = true; }
+            else showSuccess(nameInput);
+            
+            const phoneError = validatePhone(phoneInput.value);
+            if (phoneError) { showError(phoneInput, phoneError); hasErrors = true; }
+            else showSuccess(phoneInput);
+            
+            const messageError = validateMessage(messageInput.value);
+            if (messageError) { showError(messageInput, messageError); hasErrors = true; }
+            else if (messageInput.value.trim()) showSuccess(messageInput);
+            
+            if (hasErrors) {
+                const firstError = form.querySelector('.form-group.error');
+                firstError?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+            
+            // Успешная отправка
+            const successMsg = document.createElement('div');
+            successMsg.className = 'form-success-message show';
+            successMsg.textContent = '✓ Заявка отправлена! Мы перезвоним в течение 15 минут.';
+            form.appendChild(successMsg);
+            
+            form.reset();
+            form.querySelectorAll('.form-group').forEach(g => {
+                g.classList.remove('success', 'error');
+            });
+            
+            setTimeout(() => successMsg.remove(), 5000);
+        });
+    </script>
 </body>
 </html>
